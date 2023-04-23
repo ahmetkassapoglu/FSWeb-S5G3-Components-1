@@ -1,3 +1,4 @@
+import e from 'cors';
 import './haberler.less'
 // Haberleri üretmek için aşağıdaki data kullanılacak. Önce inceleyin sonra 94. satıra geçin.
 // OPSİYONEL: Kendinizi maceracı hissediyorsanız, bu verileri farklı bir modülden dışa aktarmaya çalışın ve buraya aktarın.
@@ -115,3 +116,44 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+
+let haberYapici = function(dt){
+  let article= document.createElement("div")
+  article.classList.add("article");
+
+   let h2 = document.createElement("h2")
+   h2.textContent = dt.baslik
+   article.appendChild(h2)
+   
+   let tarih = document.createElement("p")
+   tarih.classList.add("tarih")
+   tarih.textContent = dt.tarih
+   article.appendChild(tarih)
+
+   let p1 = document.createElement("p")
+   p1.textContent = dt.ilkParagraf
+   article.appendChild(p1)
+   
+   let p2 = document.createElement("p")
+   p1.textContent = dt.ikinciParagraf
+   article.appendChild(p2)
+   
+   let p3 = document.createElement("p")
+   p1.textContent = dt.ucuncuParagraf
+   article.appendChild(p3)
+
+   let button = document.createElement("span")
+   button.className = "expandButton"
+   button.style.fontsize = "25px";
+   button.textContent= ">"
+   button.style.padding = "10px"
+
+   button.addEventListener("click", () =>{
+    article.classList.toggle("article-open")
+   })
+   article.appendChild(button)
+   return article;
+}
+let articles = document.querySelector(".articles")
+
+data.map(item => articles.appendChild(haberYapici(item)));
